@@ -25,7 +25,7 @@ namespace Insurance.Utilities.Common
     {
 
         public static string Authenication = "api/v1/partner/authenticate";
-        public static string GetProductList = "api/Products/GetProducts";
+        public static string GetProductList = "/Products/GetProducts";
         public static string GetKYC = "api/v1/partner/get-kyc";
         public static string GetStates = "api/v1/partner/get-states";
         public static string GetLocalGovt = "api/v1/partner/get-local-govts";

@@ -715,7 +715,7 @@ namespace Insurance.Services.AxaMansard.Concrete
 
                     /// delete all exist product to avoid duplicate 
 
-                    _context.productBenefits.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0,LastModified= getdate() ");
+                    _context.productLists.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0,LastModified= getdate() ");
 
                     _context.productBenefits.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0,LastModified= getdate() ");
 

@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_TestLayout";
+}
+@model IEnumerable<Insurance.Data.Models.Domains.ProductList>
+<div class="row flex-lg-nowrap">
+    <div class="col mb-3">
+        <div class="e-panel card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h6 class="mr-2"><span>Product List</span><small class="px-1"></small></h6>
+                </div>
+                <div class="e-table">
+                    <div class="table-responsive table-lg mt-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    
+                                   
+                                    <th class="max-width">Product Code</th>
+                                    <th class="sortable">Description </th>
+                                    <th>duration</th>
+                                    <th>Date Generated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+
+                                        <td class="text-nowrap align-middle">@item.productCode</td>
+                                        <td class="text-nowrap align-middle"><span>@item.description</span></td>
+                                        <td class="text-nowrap align-middle"><span>@item.duration</span></td>
+                                        <td class="text-nowrap align-middle"><span>@item.CreatedDate</span></td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+

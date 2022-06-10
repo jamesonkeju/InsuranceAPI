@@ -2,6 +2,7 @@
 using Insurance.Utilities.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,21 +25,47 @@ namespace Presentation.Controllers
 
         public async Task<ActionResult> ManageProduct()
         {
+            var products = new List<Insurance.Data.Models.Domains.ProductList>();
+
             var msg = new ApiResult<AxaMansardDTO.GetProductResponse.Root>();
 
             var response = await MiddleWare.PortalPostBasicAsync(null, System.Threading.CancellationToken.None, ApplicationURL.GetProductList);
 
             if (response == null)
             {
-                msg.Message = CommonResponseMessage.InvalidRequest;
-                msg.HasError = true;
-                msg.IsSuccessful = false;
-                msg.Result = new AxaMansardDTO.GetProductResponse.Root();
-             
+                return View(products);
 
             }
+            var result = JsonConvert.DeserializeObject<Presentation.Models.productobject.Root>(response);
+           
 
-            return View();
+            if (result.isSuccessful != true)
+            {
+               
+                return View(products);
+
+            }
+          
+
+            foreach (var item in result.result.returnedObject)
+            {
+                var data = new Insurance.Data.Models.Domains.ProductList
+                {
+                    description = item.description,
+                    duration = item.duration,
+                    price = item.price,
+                    IsActive = true,
+                    IsDeleted = false,
+                    rate = item.rate,
+                    productCode = item.productCode,
+                    CreatedBy = "System"
+                };
+                products.Add(data);
+
+              
+            }
+
+            return View(products);
         }
 
         // GET: MarketPlaceController/Details/5
