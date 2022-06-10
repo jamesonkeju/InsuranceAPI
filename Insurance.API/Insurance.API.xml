@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Insurance.API</name>
+    </assembly>
+    <members>
+        <member name="M:Insurance.API.Controllers.CountryController.AddUpdateCountry(Insurance.Services.Country.DTO.CountryDTO)">
+            <summary>
+             API for creating and updating country
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.CountryController.GetAllCountries(Insurance.Data.Payload.CountryFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.CountryController.GetCountryById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.DataController.DataPricingLookUp(Insurance.Services.Telecom.DTO.BundleRequestPayload)">
+            <summary>
+            The code and allowanace from lookup are not always the same. The code indicates the product's code while the allowanace indicates the bundle purchased.
+            The "network" can be "MTN", "GLO", "AIRTEL", "9mobile"
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.DealerController.RegisterDealer(Insurance.Services.Dealer.DTO.DealerDTO)">
+            <summary>
+             API for registering, approving and creating dealers
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.EmailTemplateController.AddEmailTemplate(Insurance.Services.Emailing.DTO.EmailTemplateViewModel)">
+            <summary>
+             API for creating and updating email template
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.EmailTemplateController.GetAllCountries(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.EmailTemplateController.GetEmailTemplateById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.FAQsController.AddUpdateQuestionAndAnswer(Insurance.Services.FAQsDTO.DTO.NotificationLogDTO)">
+            <summary>
+             API for creating and updating country
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.FAQsController.GetAllQuestionAndAnswers(Insurance.Data.Payload.FAQsFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionController.AddUpdateProductCommission(Insurance.Services.Product.DTO.ProductCommission)">
+            <summary>
+             API for creating and updating Product
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionController.GetAllProductServiceCommission(Insurance.Data.Payload.ProductCommisionFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionController.GetProductServiceById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionSuperDealerController.AddUpdateProductCommission(Insurance.Services.ProductServiceCommissionSuperDealer.Dto.ProductServiceCommissionDto)">
+            <summary>
+             API for creating and updating Product
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionSuperDealerController.GetAllProductServiceCommission(Insurance.Data.Payload.ProductServiceCommissionSuperDealerFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductCommisionSuperDealerController.GetProductServiceById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductController.AddUpdateProduct(Insurance.Services.Product.DTO.ProductDto)">
+            <summary>
+             API for creating and updating Product
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductController.GetAllProduct(Insurance.Data.Payload.ProductFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductController.GetProductById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductServicesController.AddUpdateProduct(Insurance.Services.Product.DTO.ProductServiceDto)">
+            <summary>
+             API for creating and updating Product
+            </summary>
+            <param name="payload"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductServicesController.GetAllProductService(Insurance.Data.Payload.ProductServiceFilter)">
+            <summary>
+            
+            </summary>
+            <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Insurance.API.Controllers.ProductServicesController.GetProductServiceById(System.Int64,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="Id"></param>
+            <param name="CheckDeleted"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
