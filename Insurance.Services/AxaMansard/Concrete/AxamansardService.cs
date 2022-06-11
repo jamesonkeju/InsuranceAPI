@@ -361,14 +361,14 @@ namespace Insurance.Services.AxaMansard.Concrete
 
                     var PolicyName = new TrackingNumberRequest
                     {
-                        TrackingNumber = request.TrackingNumber
+                        TrackingNumber = result.TrackingNumber
                     };
 
                     var data = await GetPolicyDetails(PolicyName, Token);
 
                     var Policy = new CustomerPolicy
                     {
-                        TrackingNumber = request.TrackingNumber,
+                        TrackingNumber = result.TrackingNumber,
                         PolicyType = "New Policy",
                         CreatedDate = DateTime.Now,
                         IsDeleted = false,

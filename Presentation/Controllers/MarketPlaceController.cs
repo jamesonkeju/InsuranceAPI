@@ -3,8 +3,10 @@ using Insurance.Services.AxaMansard.DTO;
 using Insurance.Utilities.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NToastNotify;
 using Presentation.Models;
 using System;
 using System.Collections.Generic;
@@ -19,15 +21,16 @@ namespace Presentation.Controllers
     public class MarketPlaceController : Controller
     {
         private InsuranceAppContext _context;
-
-        public MarketPlaceController(InsuranceAppContext context)
+        private IToastNotification _toastNotification;
+        public MarketPlaceController(InsuranceAppContext context, IToastNotification toastNotification)
         {
             _context = context;
+            _toastNotification = toastNotification;
         }
         // GET: MarketPlaceController
         public async Task<ActionResult> Index()
         {
-
+            
             return View();
         }
 
@@ -41,7 +44,8 @@ namespace Presentation.Controllers
 
             if (response == null)
             {
-                return View(products);
+                _toastNotification.AddErrorToastMessage("System unable to fetch the data at the moment.");
+                return RedirectToAction("ManageProduct");
 
             }
             var result = JsonConvert.DeserializeObject<Presentation.Models.productobject.Root>(response);
@@ -49,8 +53,8 @@ namespace Presentation.Controllers
 
             if (result.isSuccessful != true)
             {
-
-                return View(products);
+                _toastNotification.AddErrorToastMessage("System unable to fetch the data at the moment.");
+                return RedirectToAction("ManageProduct");
 
             }
 
@@ -72,7 +76,7 @@ namespace Presentation.Controllers
 
 
             }
-
+            _toastNotification.AddSuccessToastMessage("Request Found");
             return View(products);
         }
 
@@ -88,7 +92,8 @@ namespace Presentation.Controllers
 
                 if (response == null)
                 {
-                    return View(null);
+                    _toastNotification.AddAlertToastMessage("Selected Plan not found, please try again");
+                    return RedirectToAction("ManageProduct");
                 }
 
                 // convert the response
@@ -96,7 +101,8 @@ namespace Presentation.Controllers
 
                 if (result.isSuccessful != true)
                 {
-                    return View(null);
+                    _toastNotification.AddAlertToastMessage(result.message);
+                    return RedirectToAction("ManageProduct");
                 }
 
                 var returnProperties = result.result.returnedObject;
@@ -110,12 +116,14 @@ namespace Presentation.Controllers
                         Name = item
                     });
                 }
+                _toastNotification.AddInfoToastMessage("Complete your KYC to purcahse your policy");
+                
                 return View(loadList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                _toastNotification.AddErrorToastMessage("Inner error " + ex.Message);
+                return RedirectToAction("ManageProduct");
             }
         }
 
@@ -162,12 +170,31 @@ namespace Presentation.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<ActionResult> ManageState()
+        {
+            var loadState = await _context.States.Where(a => a.IsActive == true).ToListAsync();
+            return View(loadState);
+        }
+        [HttpGet]
+        public async Task<ActionResult> ManageLGA(string StateName)
+        {
+            var loadState = await _context.LGAs.Where(a => a.IsActive == true && a.StateCode == StateName).ToListAsync();
+            return View(loadState);
+        }
+
         // GET: MarketPlaceController/Create
         public ActionResult ManagePolicies()
         {
             var getPolices = _context.CustomerPolicies.ToList();
 
             return View(getPolices);
+        }
+
+        public ActionResult RenewPolicy()
+        {
+            return View(new Insurance.Services.AxaMansard.DTO.AxaMansardDTO.RenewRequest());
         }
 
         // POST: MarketPlaceController/Create
@@ -207,18 +234,33 @@ namespace Presentation.Controllers
         public async Task<ActionResult> ProcessPolicy(IFormCollection collection)
         {
             int totalData = collection.Count();
+
+            if (totalData == 0)
+            {
+                _toastNotification.AddErrorToastMessage("Kindly supply all fields");
+                return RedirectToAction("ManageProduct");
+
+            }
+
             var list = new Dictionary<string, string>();
 
             int addOn = 0;
+            int countPhone = 0;
             foreach (string key in collection.Keys)
             {
                 addOn = addOn + 1;
                 if (addOn != totalData)
                 {
+                    if(key == "PhoneNumber")
+                    {
+                        countPhone = collection[key].Count();
+                    }
                     list.Add(key, collection[key]);
                 }
 
             }
+
+          
 
              string JsonResult = Newtonsoft.Json.JsonConvert.SerializeObject(list);
 
@@ -226,16 +268,19 @@ namespace Presentation.Controllers
 
             if (response == null)
             {
-                return View(null);
+                _toastNotification.AddErrorToastMessage("Invalid operation");
+                return RedirectToAction("ManageProduct");
             }
             var result = JsonConvert.DeserializeObject<Presentation.Models.generatepolicy.Root>(response);
 
-            if (result.isSuccessful != "true")
+            if (result.isSuccessful != true)
             {
-                return View(null);
+                _toastNotification.AddErrorToastMessage(result.message);
+                return RedirectToAction("ManageProduct");
             }
-            ViewBag.Message = result.Result.message;
-            ViewBag.trackingNumber = result.Result.trackingNumber;
+            ViewBag.Message = result.result.message;
+            ViewBag.trackingNumber = result.result.trackingNumber;
+            _toastNotification.AddSuccessToastMessage("Policy number is " + result.result.trackingNumber);
             return View("Completed");
         }
         private JObject FormCollectionToJson(IFormCollection obj)

@@ -55,7 +55,7 @@ namespace Presentation
            
             services.AddMvcCore().AddRazorPages(options =>
             {
-                options.Conventions.AddPageRoute("/Home/Index", "");
+                options.Conventions.AddPageRoute("/Marketplace/ManageProduct", "");
 
             }).AddNToastNotifyToastr(new ToastrOptions
             {

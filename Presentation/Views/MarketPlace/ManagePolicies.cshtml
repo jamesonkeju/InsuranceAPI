@@ -8,7 +8,7 @@
         <div class="e-panel card">
             <div class="card-body">
                 <div class="card-title">
-                    <h6 class="mr-2"><span>Policies List</span><small class="px-1"></small></h6>
+                    <h6 class="mr-2"><span>Registered Polices List</span><small class="px-1"></small></h6>
                 </div>
                 <div class="e-table">
                     <div class="table-responsive table-lg mt-3">
@@ -16,8 +16,8 @@
                             <thead>
                                 <tr>
 
-
-
+                                    <th>SN </th>
+                                    <th>Name </th>
                                     <th class="sortable">Tracking Number </th>
                                     <th>Policy Start</th>
                                     <th>Policy End</th>
@@ -26,19 +26,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @{int rowNo = 0;}
                                 @foreach (var item in Model)
                                 {
-                                <tr>
+                                    <tr>
 
-                                    <td class="text-nowrap align-middle">@item.TrackingNumber</td>
-                                    <td class="text-nowrap align-middle"><span>@item.PolicyStartDate</span></td>
-                                    <td class="text-nowrap align-middle"><span>@item.PolicyStartEndDate</span></td>
-                                    <td class="text-nowrap align-middle"><span>@item.CreatedDate</span></td>
-                                    <td class="text-nowrap align-middle">
+                                        <td>@(rowNo += 1)</td>
+                                        <td class="text-nowrap align-middle">@item.FirstName @item.LastName</td>
+                                        <td class="text-nowrap align-middle">@item.TrackingNumber</td>
+                                        <td class="text-nowrap align-middle"><span>@item.PolicyStartDate</span></td>
+                                        <td class="text-nowrap align-middle"><span>@item.PolicyStartEndDate</span></td>
+                                        <td class="text-nowrap align-middle"><span>@item.CreatedDate</span></td>
+                                        <td class="text-nowrap align-middle">
 
-                                    <a  asp-controller="MarketPlace" asp-action="PolicyDetails" asp-route-TrackingNumber="@item.TrackingNumber">View</a></td>
+                                            <a asp-controller="MarketPlace" asp-action="PolicyDetails" asp-route-TrackingNumber="@item.TrackingNumber">View</a>
+                                        </td>
 
-                                </tr>
+                                    </tr>
                                 }
                             </tbody>
                         </table>

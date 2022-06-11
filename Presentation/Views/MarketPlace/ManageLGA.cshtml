@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "_TestLayout";
 }
-@model IEnumerable<Insurance.Data.Models.Domains.ProductList>
+@model IEnumerable<Insurance.Data.Models.Domains.LGA>
 <div class="row flex-lg-nowrap">
     <div class="col mb-3">
         <div class="e-panel card">
@@ -18,11 +18,9 @@
 
 
                                     <th>SN</th>
-                                    <th>Product Code</th>
-                                    <th>Description </th>
-                                    <th>duration</th>
-                                    <th>Date Generated</th>
-                                    <th>Pay Policy</th>
+                                    <th>LGA Name</th>
+                                   
+                                    <th>List Providers</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -31,11 +29,9 @@
                                                         {
                                                             <tr>
                                                                 <td>@(rowNo += 1)</td>
-                                                                <td class="text-nowrap align-middle">@item.productCode</td>
-                                                                <td class="text-nowrap align-middle"><span>@item.description</span></td>
-                                                                <td class="text-nowrap align-middle"><span>@item.duration</span></td>
-                                                                <td class="text-nowrap align-middle"><span>@item.CreatedDate</span></td>
-                                                                <td class="text-nowrap align-middle"><a asp-controller="MarketPlace" asp-action="PayPolicy" asp-route-ProductCode="@item.productCode" asp-route-Description="@item.description">Buy Policy</a></td>
+                                                                <td class="text-nowrap align-middle">@item.LGAName</td>
+                                                           
+                                                                <td class="text-nowrap align-middle"><a asp-controller="MarketPlace" asp-action="PayPolicy" asp-route-StateCode="@item.StateCode" asp-route-LGAName="@item.LGAName">Buy Policy</a></td>
 
                                                             </tr>
                                                         }
