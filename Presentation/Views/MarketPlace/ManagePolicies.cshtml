@@ -2,13 +2,13 @@
     ViewData["Title"] = "Home Page";
     Layout = "_TestLayout";
 }
-@model IEnumerable<Insurance.Data.Models.Domains.ProductList>
+@model IEnumerable<Insurance.Data.Models.Domains.CustomerPolicy>
 <div class="row flex-lg-nowrap">
     <div class="col mb-3">
         <div class="e-panel card">
             <div class="card-body">
                 <div class="card-title">
-                    <h6 class="mr-2"><span>Product List</span><small class="px-1"></small></h6>
+                    <h6 class="mr-2"><span>Policies List</span><small class="px-1"></small></h6>
                 </div>
                 <div class="e-table">
                     <div class="table-responsive table-lg mt-3">
@@ -17,11 +17,12 @@
                                 <tr>
 
 
-                                    <th class="max-width">Product Code</th>
-                                    <th class="sortable">Description </th>
-                                    <th>duration</th>
-                                    <th>Date Generated</th>
-                                    <th>Pay Policy</th>
+
+                                    <th class="sortable">Tracking Number </th>
+                                    <th>Policy Start</th>
+                                    <th>Policy End</th>
+                                    <th>Created Date</th>
+                                    <th>Details</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,16 +30,19 @@
                                 {
                                 <tr>
 
-                                    <td class="text-nowrap align-middle">@item.productCode</td>
-                                    <td class="text-nowrap align-middle"><span>@item.description</span></td>
-                                    <td class="text-nowrap align-middle"><span>@item.duration</span></td>
+                                    <td class="text-nowrap align-middle">@item.TrackingNumber</td>
+                                    <td class="text-nowrap align-middle"><span>@item.PolicyStartDate</span></td>
+                                    <td class="text-nowrap align-middle"><span>@item.PolicyStartEndDate</span></td>
                                     <td class="text-nowrap align-middle"><span>@item.CreatedDate</span></td>
-                                    <td class="text-nowrap align-middle"><a asp-controller="MarketPlace" asp-action="PayPolicy" asp-route-ProductCode="@item.productCode" asp-route-Description="@item.description">Pay Policy</a></td>
+                                    <td class="text-nowrap align-middle">
+
+                                    <a  asp-controller="MarketPlace" asp-action="PolicyDetails" asp-route-TrackingNumber="@item.TrackingNumber">View</a></td>
 
                                 </tr>
                                 }
                             </tbody>
                         </table>
+                       
                     </div>
                    
                 </div>

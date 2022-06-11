@@ -183,6 +183,47 @@ namespace Insurance.Utilities.Common
 
                 }
             }
-        } 
+        }
+
+        public static async Task<string> PortalGetBasicAsync(string ApiCall)
+        {
+            if (ApplicationState.ToLower() == "production")
+            {
+
+                baseurl = productionAPI;
+
+            }
+            else
+            {
+                baseurl = testAPI;
+            }
+
+            string buildurl = baseurl + ApiCall;
+
+           
+
+
+            using (var client = new HttpClient())
+            {
+                //Passing service base url
+                client.BaseAddress = new Uri(baseurl);
+                client.DefaultRequestHeaders.Clear();
+
+             
+                //Define request data format
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                //Sending request to find web api REST service resource GetAllEmployees using HttpClient
+                HttpResponseMessage resultRespone = await client.GetAsync(ApiCall);
+
+                using (var response = await client
+                                                            .GetAsync(buildurl)
+                                                            .ConfigureAwait(false))
+                {
+                    var data = await response.Content.ReadAsStringAsync();
+
+                    return data;
+                }
+            }
+        }
     }
 }

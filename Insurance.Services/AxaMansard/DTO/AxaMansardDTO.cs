@@ -62,7 +62,11 @@ namespace Insurance.Services.AxaMansard.DTO
             public string PartnerCode { get; set; }
             public string ProductCode { get; set; }
         }
-
+        public class KYCRequestProductCode
+        {
+           
+         public string ProductCode { get; set; }
+        }
         public class ProviderListRequest
         {
            

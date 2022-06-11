@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_TestLayout";
+}
+@model List<Presentation.Models.DynamicFormField>
+<div class="row flex-lg-nowrap">
+    <div class="col mb-3">
+        <div class="e-panel card">
+            <div class="card-body">
+                <div class="card-title">
+                    <h6 class="mr-2">Sign on for @ViewBag.Description Policy</h6>
+                </div>
+                <div class="e-table">
+                    <div class="table-responsive table-lg mt-3">
+                        <form asp-action="ProcessPolicy" asp-controller="MarketPlace" method="post" novalidate>
+                            <table class="table table-bordered">
+
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        string typeProperty = "text";
+
+                                        if (item.Name.Contains("DOB"))
+                                        {
+                                            typeProperty = "date";
+                                        }
+                                        <tr>
+
+                                            <td class="text-nowrap align-middle">
+
+
+                                                <input type="@typeProperty" asp-for="@item.Name" required class="form-control" data-date-format="YYYY/MM/DD" id="@item.Name" name="@item.Name">
+
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="PartnerCode" id="PartnerCode" value="@ViewBag.PartnerCode" />
+                            <input type="hidden" name="ProductCode" id="ProductCode" value="@ViewBag.ProductCode" />
+                            <br /><br />   <input type="submit" class="btn btn-primary" Value="Submit" style="width:160px">
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

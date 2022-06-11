@@ -335,7 +335,7 @@ namespace Insurance.Services.AxaMansard.Concrete
                 // convert the response
                 var result = JsonConvert.DeserializeObject<AxaMansardDTO.PatnerCustomerReponse.Root>(response);
 
-                
+
               
 
                 if (result.isSuccessful != "true")
@@ -361,13 +361,14 @@ namespace Insurance.Services.AxaMansard.Concrete
 
                     var PolicyName = new TrackingNumberRequest
                     {
-                        TrackingNumber = payload.TrackingNumber
+                        TrackingNumber = request.TrackingNumber
                     };
+
                     var data = await GetPolicyDetails(PolicyName, Token);
 
                     var Policy = new CustomerPolicy
                     {
-                        TrackingNumber = payload.TrackingNumber,
+                        TrackingNumber = request.TrackingNumber,
                         PolicyType = "New Policy",
                         CreatedDate = DateTime.Now,
                         IsDeleted = false,
@@ -715,9 +716,9 @@ namespace Insurance.Services.AxaMansard.Concrete
 
                     /// delete all exist product to avoid duplicate 
 
-                    _context.productLists.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0,LastModified= getdate() ");
+                    _context.productLists.FromSqlRaw("UPDATE productLists SET isdeleted =1, isactive =0, LastModified= getdate() ");
 
-                    _context.productBenefits.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0,LastModified= getdate() ");
+                    _context.productBenefits.FromSqlRaw("UPDATE productBenefits SET isdeleted =1, isactive =0, LastModified= getdate()");
 
 
                     // save the list of items 
@@ -797,12 +798,7 @@ namespace Insurance.Services.AxaMansard.Concrete
                 else
                 {
 
-                    //var saveKYC = new CustomerKYC
-                    //{
-                    //    CreatedBy="System",
-                    //    CreatedDate=DateTime.Now,
-                    //    FirstN
-                    //}
+                   
 
                     msg.Message = result.message;
                     msg.HasError = true;

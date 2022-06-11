@@ -314,7 +314,7 @@ namespace Insurance.API.Controllers
         /// <param name="ProductCode"></param>
         /// <returns></returns>
 
-        [HttpPost]
+        [HttpGet]
         [ProducesResponseType(typeof(ApiResult<KYCRequestResponse.Root>), 200)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
         [ProducesResponseType(500)]
